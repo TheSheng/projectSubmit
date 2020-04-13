@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.java.mapper.NoticeMapper">
+   <select id="selectByPage" parameterType="java.util.Map" resultType="com.bishe.java.pojo.Notice">
+        select * from notice
+        <trim suffixOverrides="or" prefix="where">
+           <if test=" map.if!=null and map.if !=''">
+            title like '%${map.if}%' or
+           </if>
+            <if test=" map.if!=null and map.if !=''">
+                message like '%${map.if}%' or
+            </if>
+        </trim>
+        order by time desc
+   </select>
+
+</mapper>

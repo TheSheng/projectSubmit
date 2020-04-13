@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="index">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>尹梦凡项目申报系统</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <link rel="icon" href="../assets/img/icon.ico" type="image/x-icon"/>
+
+    <!-- Fonts and icons -->
+    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/angular-cookies.js"></script>
+    <script type="text/javascript" src="js/user.js"></script>
+    <script type="text/javascript" src="js/sweetalert-dev.js"></script>
+
+
+    <script>
+        WebFont.load({
+            custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['../assets/css/fonts.css']},
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/azzara.min.css">
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../assets/css/demo.css">
+</head>
+<body ng-controller="indexController">
+<div class="wrapper">
+    <!--
+        Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
+    -->
+    <div class="main-header" data-background-color="purple">
+        <!-- Logo Header -->
+        <div class="logo-header">
+
+
+
+            <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="fa fa-bars"></i>
+					</span>
+            </button>
+            <button class="topbar-toggler more"><i class="fa fa-ellipsis-v"></i></button>
+            <div class="navbar-minimize">
+                <button class="btn btn-minimize btn-rounded">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-header navbar-expand-lg">
+
+            <div class="container-fluid">
+                <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                    <li class="nav-item toggle-nav-search hidden-caret">
+                        <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown hidden-caret">
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <div class="avatar-sm">
+                                <img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle touImg">
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user animated fadeIn">
+                            <li>
+                                <div class="user-box">
+                                    <div class="avatar-lg"><img src="../assets/img/profile.jpg" alt="image profile" class="avatar-img rounded touImg"></div>
+                                    <div class="u-text">
+                                        <h4>{{user.name}}</h4>
+                                        <p class="text-muted">{{user.email}}</p><a href="/user" class="btn btn-rounded btn-danger btn-sm">浏览名片</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/login">退出登录</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+    </div>
+
+
+    <!-- 左侧导航栏 -->
+    <div class="sidebar">
+
+        <div class="sidebar-background"></div>
+        <div class="sidebar-wrapper scrollbar-inner">
+            <div class="sidebar-content">
+                <div class="user">
+
+                    <div class="avatar-sm float-left mr-2">
+                        <img src="{{user.imgurl}}" alt="..." class="avatar-img rounded-circle">
+                    </div>
+                    <div class="info">
+                        <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+									{{user.name}}
+									<span class="user-level">{{user.type}}</span>
+								</span>
+                        </a>
+
+                    </div>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="/">
+                            <i class="fas fa-home"></i>
+                            <p>菜单</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/show">
+                            <i class="fas fa-layer-group"></i>
+                            <p>项目查看</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="/noticeshow">
+                            <i class="fas fa-coffee"></i>
+                            <p>公告查看</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/project">
+                            <i class="fas fa-pen-square"></i>
+                            <p>我的项目</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="/chushen">
+                            <i class="fas  fa-check-circle"></i>
+                            <p>项目初审</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/fushen">
+                            <i class="fas fa-check-double"></i>
+                            <p>项目复审</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/zhongshen">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p >项目终审</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/notice">
+                            <i class="far fa-chart-bar"></i>
+                            <p>公告管理</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+   <div class="main-panel" >
+                <div class="content">
+                    <div class="page-inner">
+                        <h4 class="page-title">User Profile</h4>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="card card-with-nav">
+                                    <div class="card-header">
+                                        <div class="row row-nav-line">
+                                            <ul class="nav nav-tabs nav-line nav-color-secondary" role="tablist">
+                                                <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="" role="tab" aria-selected="true">我的详细信息</a> </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <div class="form-group form-group-default">
+                                                    <label>Name</label>
+                                                    <input type="text" class="form-control" name="name" placeholder="Name"  ng-model="user.name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-group-default">
+                                                    <label>Email</label>
+                                                    <input type="email" class="form-control" name="email" placeholder="Name" ng-model="user.email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-4">
+                                                <div class="form-group form-group-default">
+                                                    <label>我的职级</label>
+                                                    <input type="text" class="form-control" id="datepicker" name="datepicker"  ng-model="user.type" ng-disabled="true">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group form-group-default">
+                                                    <label>我的学校</label>
+                                                    <input type="text" class="form-control" id="scool" name="datepicker"  value="中北大学" ng-disabled="true">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4" ng-if="user.teacher!=null">
+                                                <div class="form-group form-group-default">
+                                                    <label>指导教师工号</label>
+                                                    <input type="text" class="form-control" value="+62008765678" name="phone" ng-disabled="true" ng-model="user.teacher">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <div class="form-group form-group-default">
+                                                    <label>学号(工号)</label>
+                                                    <input type="text" class="form-control"  ng-disabled="true" ng-model="user.username">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3 mb-1">
+                                            <div class="col-md-12">
+                                                <div class="form-group form-group-default">
+                                                    <label>登录密码</label>
+                                                    <input type="password"   placeholder="密码" class="form-control"   ng-model="user.password">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right mt-3 mb-3">
+                                            <button class="btn btn-success" ng-click="updateUser()">Save</button>
+                                            <button class="btn btn-danger"  ng-click="resetUser()">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card card-profile card-secondary">
+                                    <div class="card-header" style="background-image: url('../assets/img/blogpost.jpg')">
+                                        <div class="profile-picture">
+                                            <div class="avatar avatar-xl">
+                                                <img src="{{user.imgurl}}" alt="..." class="avatar-img rounded-circle">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="user-profile text-center">
+                                            <div class="name">{{user.name}}</div>
+                                            <div class="job">{{user.type}}</div>
+                                            <div class="desc">中北大学的一位靓仔</div>
+                                            <div class="social-media">
+                                                <a class="btn btn-info btn-twitter btn-sm btn-link" href="#">
+                                                    <span class="btn-label just-icon"><i class="flaticon-twitter"></i> </span>
+                                                </a>
+                                                <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#">
+                                                    <span class="btn-label just-icon"><i class="flaticon-google-plus"></i> </span>
+                                                </a>
+                                                <a class="btn btn-primary btn-sm btn-link" rel="publisher" href="#">
+                                                    <span class="btn-label just-icon"><i class="flaticon-facebook"></i> </span>
+                                                </a>
+                                                <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#">
+                                                    <span class="btn-label just-icon"><i class="flaticon-dribbble"></i> </span>
+                                                </a>
+                                            </div>
+                                            <div class="view-profile">
+                                                <a href="#" class="btn btn-secondary btn-block">{{user.email}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row user-stats text-center">
+                                            <div class="col">
+                                                <div class="number">125</div>
+                                                <div class="title">Post</div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="number">25K</div>
+                                                <div class="title">Followers</div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="number">134</div>
+                                                <div class="title">Following</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+    <!-- Custom template | don't include it in your project! -->
+    <div class="custom-template">
+        <div class="title">Settings</div>
+        <div class="custom-content">
+            <div class="switcher">
+                <div class="switch-block">
+                    <h4>Topbar</h4>
+                    <div class="btnSwitch">
+                        <button type="button" class="changeMainHeaderColor" data-color="blue"></button>
+                        <button type="button" class="selected changeMainHeaderColor" data-color="purple"></button>
+                        <button type="button" class="changeMainHeaderColor" data-color="light-blue"></button>
+                        <button type="button" class="changeMainHeaderColor" data-color="green"></button>
+                        <button type="button" class="changeMainHeaderColor" data-color="orange"></button>
+                        <button type="button" class="changeMainHeaderColor" data-color="red"></button>
+                    </div>
+                </div>
+                <div class="switch-block">
+                    <h4>Background</h4>
+                    <div class="btnSwitch">
+                        <button type="button" class="changeBackgroundColor" data-color="bg2"></button>
+                        <button type="button" class="changeBackgroundColor selected" data-color="bg1"></button>
+                        <button type="button" class="changeBackgroundColor" data-color="bg3"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="custom-toggle">
+            <i class="flaticon-settings"></i>
+        </div>
+    </div>
+
+</div>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script src="../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+<!-- jQuery Scrollbar -->
+<script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+<!-- Moment JS -->
+<script src="../assets/js/plugin/moment/moment.min.js"></script>
+
+<!-- Chart JS -->
+<script src="../assets/js/plugin/chart.js/chart.min.js"></script>
+
+<!-- jQuery Sparkline -->
+<script src="../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Chart Circle -->
+<script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
+
+<!-- Datatables -->
+<script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+
+<!-- Bootstrap Notify -->
+<script src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+<!-- Bootstrap Toggle -->
+<script src="../assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+
+<!-- jQuery Vector Maps -->
+<script src="../assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+<script src="../assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+
+<!-- Google Maps Plugin -->
+<script src="../assets/js/plugin/gmaps/gmaps.js"></script>
+
+<!-- Sweet Alert -->
+<script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+<!-- Azzara JS -->
+<script src="../assets/js/ready.min.js"></script>
+
+<!-- Azzara DEMO methods, don't include it in your project! -->
+<script src="../assets/js/setting-demo.js"></script>
+</body>
+</html>

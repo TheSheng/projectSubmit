@@ -1,0 +1,45 @@
+
+# 配置mybatis-plus
+mybatis-plus:
+    # 配置扫描xml
+#    configuration:
+#        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapper-locations:
+        - classpath:xml/*.xml
+    # 实体扫描，多个package用逗号或者分号分隔
+    type-aliases-package: com.ahut.entity
+    global-config:
+        # 逻辑删除配置
+        logic-delete-value: 0
+        logic-not-delete-value: 1
+spring:
+    redis:
+        host: localhost
+        port: 6379
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://rm-bp1k7cu4dwrn17l84lo.mysql.rds.aliyuncs.com:3306/bishe?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: root
+        password: lisheng442
+        #   数据源其他配置
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat,wall
+        maxPoolPreparedStatementPerConnectionSize: 20
+        useGlobalDataSourceStat: true
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    servlet:
+        multipart:
+            #上传一个文件最大值  默认是1MB
+            max-file-size: 100MB
+            #上传多个文件最大值  默认

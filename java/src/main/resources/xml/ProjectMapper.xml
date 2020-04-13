@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.java.mapper.ProjectMapper">
+   <select id="selectByMyPage" parameterType="java.util.Map" resultType="com.bishe.java.pojo.Project">
+        select * from project where project_user=#{map.user}
+        <trim suffixOverrides="or" prefix="and">
+           <if test=" map.if!=null and map.if !=''">
+            project_name like '%${map.if}%' or
+           </if>
+
+        </trim>
+        order by project_update desc
+   </select>
+    <select id="selectByChushenMyPage" parameterType="java.util.Map" resultType="com.bishe.java.pojo.Project">
+        select * from project where project_teacher=#{map.user}
+        <trim suffixOverrides="or" prefix="and">
+            <if test=" map.if!=null and map.if !=''">
+                project_name like '%${map.if}%' or
+            </if>
+
+        </trim>
+        order by project_update desc
+    </select>
+    <select id="selectByFushenMyPage" parameterType="java.util.Map" resultType="com.bishe.java.pojo.Project">
+        select * from project where major_teacher=#{map.user}
+        <trim suffixOverrides="or" prefix="and">
+            <if test=" map.if!=null and map.if !=''">
+                project_name like '%${map.if}%' or
+            </if>
+
+        </trim>
+        order by project_update desc
+    </select>
+    <select id="selectByZhongshen" parameterType="java.util.Map" resultType="com.bishe.java.pojo.Project">
+        select * from project where school_teacher=#{map.user}
+        <trim suffixOverrides="or" prefix="and">
+            <if test=" map.if!=null and map.if !=''">
+                project_name like '%${map.if}%' or
+            </if>
+
+        </trim>
+        order by project_update desc
+    </select>
+    <select id="getAll" parameterType="java.util.Map" resultType="com.bishe.java.pojo.Project">
+        select * from project
+        <trim suffixOverrides="or" prefix="where">
+            <if test=" map.if!=null and map.if !=''">
+                project_name like '%${map.if}%' or
+            </if>
+            <if test=" map.if!=null and map.if !=''">
+                project_time like '%${map.if}%' or
+            </if>
+            <if test=" map.if!=null and map.if !=''">
+                project_user like '%${map.if}%' or
+            </if>
+            <if test=" map.if!=null and map.if !=''">
+                project_teacher like '%${map.if}%' or
+            </if>
+            <if test=" map.if!=null and map.if !=''">
+                major_teacher like '%${map.if}%' or
+            </if>
+            <if test=" map.if!=null and map.if !=''">
+                school_teacher like '%${map.if}%' or
+            </if>
+            <if test=" map.if!=null and map.if !=''">
+                next_people like '%${map.if}%' or
+            </if>
+            <if test=" map.if!=null and map.if !=''">
+                status like '%${map.if}%' or
+            </if>
+            <if test=" map.if!=null and map.if !=''">
+                project_update like '%${map.if}%' or
+            </if>
+        </trim>
+        order by project_update desc
+    </select>
+    <select id="getAllUser" resultType="java.lang.Integer">
+        select count(1) from user
+    </select>
+    <select id="getAllProject" resultType="java.lang.Integer">
+        select count(1) from project
+    </select>
+    <select id="getAllNotice" resultType="java.lang.Integer">
+        select count(1) from notice
+    </select>
+</mapper>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="login">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>登录页</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="../assets/img/icon.ico" type="image/x-icon"/>
+
+	<!-- Fonts and icons -->
+	<script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+	<script>
+		WebFont.load({
+			google: {"families":["Open+Sans:300,400,600,700"]},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['../assets/css/fonts.css']},
+			active: function() {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/angular-cookies.js"></script>
+    <script type="text/javascript" src="js/loginController.js"></script>
+    <script type="text/javascript" src="js/sweetalert-dev.js"></script>
+    <link  rel="stylesheet" href="css/sweetalert.css"></link>
+
+
+    <!-- CSS Files -->
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../assets/css/azzara.min.css">
+</head>
+<body class="login" ng-controller="loginController">
+	<div class="wrapper wrapper-login">
+		<div class="container container-login animated fadeIn">
+                <div class="avatar-lg" style="margin: 0 auto">
+                    <img src="../img/中北.jpg" alt="..." class="avatar-img rounded-circle" id="loginImg">
+                </div>
+
+			<h3 class="text-center">项目申报系统</h3>
+			<div class="login-form">
+				<div class="form-group form-floating-label">
+					<input id="username" name="username" ng-model="loginUsername" type="number" class="form-control input-border-bottom" required>
+					<label for="username" class="placeholder">学号(工号)</label>
+				</div>
+				<div class="form-group form-floating-label">
+					<input id="password" name="password" type="password" ng-model="loginPassword" class="form-control input-border-bottom" required>
+					<label for="password" class="placeholder">密码</label>
+					<div class="show-password">
+						<i class="flaticon-interface"></i>
+					</div>
+				</div>
+				<div class="row form-sub m-0">
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="rememberme" ng-click="remeberMe=!remeberMe">
+						<label class="custom-control-label" for="rememberme">记住该账号</label>
+					</div>
+
+				</div>
+				<div class="form-action mb-3">
+					<a href="#" class="btn btn-primary btn-rounded btn-login" ng-click="login()">登录</a>
+				</div>
+				<div class="login-account">
+					<span class="msg">尚未注册 ?</span>
+					<a href="#" id="show-signup" class="link">点击注册</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="container container-signup animated fadeIn">
+            <div class="avatar-lg" style="margin: 0 auto">
+                <img src="../img/中北.jpg" alt="..." class="avatar-img rounded-circle" id="regImg">
+            </div>
+			<h3 class="text-center">账号注册</h3>
+			<div class="login-form">
+                <div class="form-group form-floating-label">
+                    <input  id="imgUrl"  type="file" class="form-control input-border-bottom">
+                    <label for="fullname" class="placeholder">上传头像</label>
+                    <script>
+
+
+                    </script>
+                </div>
+				<div class="form-group form-floating-label">
+                <input  id="fullname" ng-model="username" name="fullname" type="number" class="form-control input-border-bottom" >
+                <label for="fullname" class="placeholder">学号(工号)</label>
+                </div>
+                <div class="form-group form-floating-label">
+                    <input  id="name" ng-model="name" name="fullname" type="text" class="form-control input-border-bottom" >
+                    <label for="fullname" class="placeholder">姓名</label>
+                </div>
+				<div class="form-group form-floating-label">
+					<input  id="email" name="email"ng-model="email" type="text" class="form-control input-border-bottom" >
+					<label for="email" class="placeholder">邮箱</label>
+				</div>
+				<div class="form-group form-floating-label">
+					<input  id="passwordsignin" ng-model="password" name="passwordsignin" type="password" class="form-control input-border-bottom" >
+					<label for="passwordsignin" class="placeholder">密码</label>
+					<div class="show-password">
+						<i class="flaticon-interface"></i>
+					</div>
+				</div>
+				<div class="form-group form-floating-label">
+					<input  id="confirmpassword" ng-model="confirmpassword" type="password" class="form-control input-border-bottom" >
+					<label for="confirmpassword" class="placeholder">再次确认</label>
+					<div class="show-password">
+						<i class="flaticon-interface"></i>
+					</div>
+				</div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">所属学院</label>
+                    <select class="form-control" id="exampleFormControlSelect1" ng-model="major" ng-change="majorChange()">
+                        <option value="软件学院" checked>软件学院</option>
+                        <option value="理学院">理学院</option>
+                        <option value="大数据学院">大数据学院</option>
+                        <option value="体育学院">体育学院</option>
+                        <option value="艺术学院">艺术学院</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group form-floating-label">
+                    <input type="radio" class="custom-radio" name="type" ng-click="isStudent=true"  >
+                    我是学生&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <input type="radio" class="custom-radio" name="type"  ng-click="isStudent=false"  checked>
+                    我是指导老师
+                </div>
+
+                <div class="form-group" ng-if="isStudent">
+                    <label for="exampleFormControlSelect1">老师工号</label>
+                    <select class="form-control" id="exampleFormControlSelect2" ng-model="$parent.teacher">
+                        <option ng-repeat="x in majorTeacher" value="{{x.username}}">工号:{{x.username}},姓名:{{x.name}}</option>
+                    </select>
+
+                </div>
+
+
+                </div>
+				<div class="row form-sub m-0">
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" name="agree" id="agree" ng-click="check=!check">
+						<label class="custom-control-label" for="agree">我保证填写的信息真实有效</label>
+					</div>
+				</div>
+
+				<div class="form-action">
+					<a href="login" id="show-signin" class="btn btn-danger btn-rounded btn-login mr-3" >退出</a>
+					<a href="#" class="btn btn-primary btn-rounded btn-login" ng-click="register()">提交注册</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+	<script src="../assets/js/core/bootstrap.min.js"></script>
+	<script src="../assets/js/ready.js"></script>
+</body>
+</html>

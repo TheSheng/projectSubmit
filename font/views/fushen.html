@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="index">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>尹梦凡项目申报系统</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <link rel="icon" href="../assets/img/icon.ico" type="image/x-icon"/>
+
+    <!-- Fonts and icons -->
+    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/angular-cookies.js"></script>
+    <script type="text/javascript" src="js/fushen.js"></script>
+    <script type="text/javascript" src="js/sweetalert-dev.js"></script>
+
+
+    <script>
+        WebFont.load({
+            custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['../assets/css/fonts.css']},
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/azzara.min.css">
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../assets/css/demo.css">
+</head>
+<body ng-controller="indexController">
+<div class="wrapper">
+    <!--
+        Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
+    -->
+    <div class="main-header" data-background-color="purple">
+        <!-- Logo Header -->
+        <div class="logo-header">
+
+
+
+            <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="fa fa-bars"></i>
+					</span>
+            </button>
+            <button class="topbar-toggler more"><i class="fa fa-ellipsis-v"></i></button>
+            <div class="navbar-minimize">
+                <button class="btn btn-minimize btn-rounded">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-header navbar-expand-lg">
+
+            <div class="container-fluid">
+                <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                    <li class="nav-item toggle-nav-search hidden-caret">
+                        <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown hidden-caret">
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <div class="avatar-sm">
+                                <img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle touImg">
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user animated fadeIn">
+                            <li>
+                                <div class="user-box">
+                                    <div class="avatar-lg"><img src="../assets/img/profile.jpg" alt="image profile" class="avatar-img rounded touImg"></div>
+                                    <div class="u-text">
+                                        <h4>{{user.name}}</h4>
+                                        <p class="text-muted">{{user.email}}</p><a href="/user" class="btn btn-rounded btn-danger btn-sm">浏览名片</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/login">退出登录</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+    </div>
+
+
+    <!-- 左侧导航栏 -->
+    <div class="sidebar">
+
+        <div class="sidebar-background"></div>
+        <div class="sidebar-wrapper scrollbar-inner">
+            <div class="sidebar-content">
+                <div class="user">
+
+                    <div class="avatar-sm float-left mr-2">
+                        <img src="{{user.imgurl}}" alt="..." class="avatar-img rounded-circle">
+                    </div>
+                    <div class="info">
+                        <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+									{{user.name}}
+									<span class="user-level">{{user.type}}</span>
+								</span>
+                        </a>
+
+                    </div>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="/">
+                            <i class="fas fa-home"></i>
+                            <p>菜单</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/show">
+                            <i class="fas fa-layer-group"></i>
+                            <p>项目查看</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="/noticeshow">
+                            <i class="fas fa-coffee"></i>
+                            <p>公告查看</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/project">
+                            <i class="fas fa-pen-square"></i>
+                            <p>我的项目</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="/chushen">
+                            <i class="fas  fa-check-circle"></i>
+                            <p>项目初审</p>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="/fushen">
+                            <i class="fas fa-check-double"></i>
+                            <p>项目复审</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/zhongshen">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p >项目终审</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/notice">
+                            <i class="far fa-chart-bar"></i>
+                            <p>公告管理</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title">项目初审</h4>
+                                <div class="ml-auto">
+                                    <input type="text"   placeholder="项目名" class="form-control" style="display: inline;width: 200px" ng-model="pageIf"></a>
+                                    <a href="#" class="btn btn-danger"  ng-click="getByPage(1)">查询</a>
+                                    <a href="#" class="btn btn-dark"    ng-click="getByPage(PageNum-1)">上一页</a>
+                                    <a href="#" class="btn btn-info"    ng-click="getByPage(PageNum+1)">下一页</a>
+                                    <a href="#" class="btn btn-danger"  ng-click="getByPage(1)">首页</a>
+                                    <a href="#" class="btn btn-warning" ng-click="getByPage(TotalPage)">尾页</a>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- Modal -->
+                            <div class="modal fade" id="showMessage" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                        <h4 class="page-title" style="text-align: center">项目流程</h4>
+                                        <div class="row">
+                                            <div class="col-md-12">
+
+                                                <ul class="timeline">
+                                                    <li ng-repeat="x in messageList track by $index" ng-class="getLeftOrRiightClass($index)">
+                                                        <div class="timeline-badge success" ng-if="x.action=='通过了终审'"><i class="flaticon-message"></i></div>
+                                                        <div class="timeline-badge info" ng-if="x.action=='通过了初审'"><i class="flaticon-arrow"></i></div>
+                                                        <div class="timeline-badge info" ng-if="x.action=='通过了复审'"><i class="flaticon-apple"></i></div>
+                                                        <div class="timeline-badge danger" ng-if="x.action=='退回了项目'"><i class="flaticon-error"></i></div>
+                                                        <div class="timeline-badge info"  ng-if="x.action=='修改了项目'"><i class="flaticon-price-tag"></i></div>
+                                                        <div class="timeline-badge success" ng-if="x.action=='创建了项目'"><i class="flaticon-credit-card-1"></i></div>
+                                                        <div class="timeline-panel">
+                                                            <div class="timeline-heading">
+
+                                                                <h4 class="timeline-title"><div class="avatar-sm float-left">
+                                                                    <img src="{{x.imgUrl}}" alt="..." class="avatar-img rounded-circle touImg">
+                                                                </div>{{getName(x.user)}}<br>{{x.action}}</h4>
+                                                                <p><small class="text-muted"><i class="flaticon-message"></i> {{x.time}}</small></p>
+                                                            </div>
+                                                            <div class="timeline-body">
+                                                                <p>{{x.message}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="tongguo" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-bd">
+                                            <h5 class="modal-title">
+														<span class="fw-mediumbold">
+														通过项目</span>
+
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group form-group-default">
+                                                            <textarea id="addOffice1c" type="text" class="form-control"  placeholder="项目评语" ng-model="updateObj.message"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer no-bd">
+                                            <button type="button" id="addRowButton3" class="btn btn-primary"  ng-click="shenpi(updateObj.status,'复审通过','通过了复审',updateObj.schoolTeacher)">提交</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="closeCreateButton">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="tuihui" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-bd">
+                                            <h5 class="modal-title">
+														<span class="fw-mediumbold">
+														退回项目</span>
+
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group form-group-default">
+                                                            <textarea id="addOffice1" type="text" class="form-control"  placeholder="退回原因" ng-model="updateObj.message"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer no-bd">
+                                            <button type="button" id="addRowButton" class="btn btn-primary"  ng-click="shenpi(updateObj.status,'已退回','退回了项目',updateObj.projectUser)">提交</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="closeCreateButton2">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="table-responsive">
+                                <table id="add-row" class="display table table-striped table-hover" >
+                                    <thead>
+                                    <tr>
+                                        <th>项目名称</th>
+                                        <th>项目创建者</th>
+                                        <th>项目初审人</th>
+                                        <th>项目复审人</th>
+                                        <th>项目终审人</th>
+                                        <th>创建时间</th>
+                                        <th>上次修改时间</th>
+                                        <th>当前审批人</th>
+                                        <th>当前状态</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="x in projectList">
+                                        <td>{{x.projectName}}</td>
+                                        <td>{{getName(x.projectUser)}}</td>
+                                        <td>{{getName(x.projectTeacher)}}</td>
+                                        <td>{{getName(x.majorTeacher)}}</td>
+                                        <td>{{getName(x.schoolTeacher)}}</td>
+                                        <td>{{x.projectTime}}</td>
+                                        <td>{{x.projectUpdate}}</td>
+                                        <td>{{getName(x.nextPeople)}}</td>
+                                        <td>{{x.status}}</td>
+                                        <td>
+                                            <div class="form-button-action">
+                                                <button type="button"  title="" class="btn btn-link btn-success btn-lg"  data-toggle="modal" ng-click="setUpdate(x)" data-target="#tongguo">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button"  title="" class="btn btn-link btn-danger"    data-toggle="modal"  ng-click="setUpdate(x)" data-target="#tuihui">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                                <button class="btn btn-link btn-info" data-toggle="modal" data-target="#showMessage" ng-click="getMessage(x.id)" >
+                                                    <i class="fas fa-list"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Moment JS -->
+    <script src="../assets/js/plugin/moment/moment.min.js"></script>
+
+    <!-- Chart JS -->
+    <script src="../assets/js/plugin/chart.js/chart.min.js"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Chart Circle -->
+    <script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <!-- Bootstrap Toggle -->
+    <script src="../assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="../assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+    <script src="../assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+
+    <!-- Google Maps Plugin -->
+    <script src="../assets/js/plugin/gmaps/gmaps.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Azzara JS -->
+    <script src="../assets/js/ready.min.js"></script>
+
+    <!-- Azzara DEMO methods, don't include it in your project! -->
+    <script src="../assets/js/setting-demo.js"></script>
+</body>
+</html>
