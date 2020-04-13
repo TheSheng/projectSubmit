@@ -18,9 +18,9 @@ spring:
         port: 6379
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://rm-bp1k7cu4dwrn17l84lo.mysql.rds.aliyuncs.com:3306/bishe?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://xxxxxx:3306/bishe?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
-        password: lisheng442
+        password: xxxxxx
         #   数据源其他配置
         initialSize: 5
         minIdle: 5
